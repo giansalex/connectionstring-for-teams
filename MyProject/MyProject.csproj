@@ -101,6 +101,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="database.default.config" />
+    <Content Include="database.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -154,4 +158,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="BeforeBuild">
+    <Copy SourceFiles="$(ProjectDir)\database.default.config" DestinationFiles="$(ProjectDir)\database.config" Condition="!Exists('$(ProjectDir)\database.config')" />
+  </Target>
 </Project>
